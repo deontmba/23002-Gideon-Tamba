@@ -1,15 +1,9 @@
-# Program Steganografi LSB Sederhana
-# Diperlukan library Pillow untuk manipulasi gambar.
-# Install dengan cara: pip install Pillow
-
 from PIL import Image
 
 def text_to_binary(text):
-    """Mengubah string teks menjadi representasi biner."""
     return ''.join(format(ord(char), '08b') for char in text)
 
 def binary_to_text(binary):
-    """Mengubah string biner kembali menjadi teks."""
     # Memisahkan string biner menjadi bagian 8-bit
     binary_chars = [binary[i:i+8] for i in range(0, len(binary), 8)]
     text = ""
@@ -19,7 +13,6 @@ def binary_to_text(binary):
     return text
 
 def encode(image_path, secret_message, output_path):
-    """Menyembunyikan pesan rahasia di dalam sebuah gambar menggunakan metode LSB."""
     try:
         # Membuka gambar
         image = Image.open(image_path).convert('RGB')
@@ -75,7 +68,6 @@ def encode(image_path, secret_message, output_path):
         print(f"Terjadi error: {e}")
 
 def decode(stego_image_path):
-    """Mengekstrak pesan rahasia dari sebuah stego-image."""
     try:
         image = Image.open(stego_image_path).convert('RGB')
         binary_message = ""
@@ -107,10 +99,7 @@ def decode(stego_image_path):
     except Exception as e:
         return f"Terjadi error: {e}"
 
-# --- Contoh Penggunaan ---
 if __name__ == "__main__":
-    # Sediakan gambar input dengan nama 'cover_image.png'
-    # dan pastikan file ini ada di direktori yang sama dengan script.
     
     # Proses ENCODE
     pesan_rahasia = "MySunshine"
